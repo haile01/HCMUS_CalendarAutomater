@@ -23,7 +23,7 @@ Rồi chạy code bằng lệnh `python HCMUS_CalendarAutomater.py` ở *command
 
 ## Config 
 
-Ở file `config.json`, thay ` "week" : "that" ` thành ` "week" : "this" ` để đưa lịch của tuần hiện tại lên Calendar (nếu thể `that` thì sẽ là của tuần tiếp theo)
+Ở file `config.json`, thay ` "week" : "that" ` thành ` "week" : "this" ` để đưa lịch của tuần hiện tại lên Calendar (nếu để `that` thì sẽ là của tuần tiếp theo)
 
 ## Contribution
 
