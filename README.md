@@ -14,3 +14,4 @@ Then run the code with command `python HCMUS_CalendarAutomater.py`
 ## Contribution
 
 Thanks [Duy Thuc Le](https://github.com/leduykhongngu) for parsing from raw HTML to JSON database.
+Thanks [Dinh Hai Le](https://github.com/pythagore1123) for uploading database with Calendar API.
