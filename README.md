@@ -11,7 +11,7 @@ After that, go to [this link](https://developers.google.com/calendar/quickstart/
 
 Then, access the [school's portal](http://portal.hcmus.edu.vn/), log in and go to `Đăng kí học phần > Kết quả ĐKHP`. Save the page's html with `Ctrl + s` as `TKB.html` in the cloned folder, which is `HCMUS_CalendarAutomater`.
 
-Uptill now, files existing in current folder are:
+Uptill now, files existing in current folder(`HCMUS_CalendarAutomater`) are:
 * HCMUS_CalendarAutomater.py
 * config.json
 * crawlHTML.py
@@ -23,7 +23,7 @@ Then run the code with command `python HCMUS_CalendarAutomater.py`
 
 ## Config
 
-If you want to update time table of the current week, set `week` attribute as `this` inside `config.json` file, and if you want to update the upcoming week, set `week` as `that`
+If you want to update timetable of the current week, set `week` attribute as `this` inside `config.json` file, and if you want to update the upcoming week, set `week` as `that`
 
 ## Contribution
 
