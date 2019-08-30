@@ -9,7 +9,7 @@ Clone this repository, then run this line on *command prompt/terminal* to instal
 
 After that, go to [this link](https://developers.google.com/calendar/quickstart/python) to download your `credentials.json` file to the current folder (and/or you can start reading tutorials from there and modify as you wish).
 
-Then, access the [school's portal](http://portal.hcmus.edu.vn/), log in and go to `Đăng kí học phần > Kết quả ĐKHP`. Save the page's html with `Ctrl + s` as `TKB.html` in `HCMUS_CalendarAutomater` folder.
+Then, access the [school's portal](http://portal.hcmus.edu.vn/), log in and go to `Đăng kí học phần > Kết quả ĐKHP`. Save the page's html with `Ctrl + s` as `TKB.html` in the cloned folder, which is `HCMUS_CalendarAutomater`.
 
 Uptill now, files existing in current folder are:
 * HCMUS_CalendarAutomater.py
