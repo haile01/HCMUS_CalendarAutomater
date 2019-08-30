@@ -1,6 +1,8 @@
 # HCMUS_CalendarAutomater
 *A kindly simple way to have your HCMUS's timetable posted on Google Calendar*
->(Vietnamese in README-vi.md)
+
+
+**(Vietnamese in README-vi.md)**
 
 ## Installation
 
