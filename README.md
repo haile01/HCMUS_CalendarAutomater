@@ -1,14 +1,16 @@
 # HCMUS_CalendarAutomater
-*A kindly simple way to have your timetable posted on Google Calendar*
+*A kindly simple way to have your HCMUS's timetable posted on Google Calendar*
 
-## Instalation
+## Installation
 
-Clone this repository, then run this line on *command prompt/terminal* to intall dependencies
+Clone this repository, then run this line on *command prompt/terminal* to install dependencies
 
 >pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+
+After that, go to [this link](https://developers.google.com/calendar/quickstart/python) to download your `configuration.json` file to the current folder.
 
 Then run the code with `python HCMUS_CalendarAutomater.py` 
 
 ## Contribution
 
-Thanks [Duy Thuc Le](https://github.com/leduykhongngu) for parsing from raw HTML to JSON database
+Thanks [Duy Thuc Le](https://github.com/leduykhongngu) for parsing from raw HTML to JSON database.
