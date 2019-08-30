@@ -3,7 +3,7 @@
 
 ## Cài đặt
 
-Tải repository này về máy (tạm gọi thư mục đó là `HCMUS_CalendarAutomater`, sau đó chạy dòng lệnh sau đây ở *command prompt/terminal* để cài đặt API.
+Tải repository này về máy (tạm gọi thư mục đó là `HCMUS_CalendarAutomater`), sau đó chạy dòng lệnh sau đây ở *command prompt/terminal* để cài đặt API.
 
 >pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
