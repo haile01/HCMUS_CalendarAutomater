@@ -7,7 +7,7 @@ Clone this repository, then run this line on *command prompt/terminal* to instal
 
 >pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
-After that, go to [this link](https://developers.google.com/calendar/quickstart/python) to download your `configuration.json` file to the current folder (and/or you can start reading tutorials from there and modify as you wish).
+After that, go to [this link](https://developers.google.com/calendar/quickstart/python) to download your `credentials.json` file to the current folder (and/or you can start reading tutorials from there and modify as you wish).
 
 Then run the code with command `python HCMUS_CalendarAutomater.py` 
 
