@@ -41,7 +41,7 @@ def insertEvents(events, service, config):
   periods = [
     27000, 30600, 33600, 37200, 40200, 45000, 48600, 51600, 54600, 58200
   ]
-  period = 3000,
+  period = 3000
   secsPerDay = 86400
 
   main_events = []
