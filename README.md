@@ -12,7 +12,7 @@ Clone this repository, then run this line on *command prompt/terminal* to instal
 
 After that, go to [this link](https://developers.google.com/calendar/quickstart/python) to download your `credentials.json` file to the current folder (and/or you can start reading tutorials from there and modify as you wish).
 
-There are two ways for us to get your timetable template from the portal, that is crawling with your saved template, or giving us `Cookie` header after you have successfully logined
+There are **two** ways for us to get your timetable template from the portal, that is crawling with your saved template, or giving us `Cookie` header after you have successfully logined
 
 ### If you want to go with your saved template
 
@@ -30,7 +30,7 @@ Then run the code with command `python HCMUS_CalendarAutomater.py`
 
 ### If you want to go with your cookie
 
-After loging in your portal, turn on `Chrome's dev tool` by pressing `F12`, switch to `Network` tab, then refresh the page. Then, choose the first request whose name have looks like `Default.apsx?pid=...`, search for `Cookie` in `Request Headers`, copy that whole line.
+After loging in your portal, turn on `Chrome's dev tool` by pressing `F12`, switch to `Network` tab, then refresh the page. Then, choose the first request whose name looks like `Default.apsx?pid=...`, search for `Cookie` in `Request Headers`, copy that whole line.
 
 Now, go to your cloned folder, which is `HCMUS_CalendarAutomater`, run the following command
 
