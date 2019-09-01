@@ -49,16 +49,19 @@ def insertEvents(events, service, config):
     event = events[e]
     event_week = datetime.datetime.strptime(event['Tuần bắt đầu'], '%d/%m/%Y').isocalendar()[1]
     this_week = datetime.datetime.now().isocalendar()[1]
+    #if you wanna repeat the scheduler, use main_events.append(event) without if
     if(event_week <= this_week + week): 
       main_events.append(event)
+    
 
   # print(main_events)
 
   # Push events
   for event in main_events:
     temp = datetime.datetime.strptime(event['Tuần bắt đầu'], '%d/%m/%Y')
+    temp = datetime.datetime.fromtimestamp(temp.timestamp() - temp.isocalendar()[2]*secsPerDay + secsPerDay)
     date = temp.timestamp() + (int(event['Lịch học']['Thứ']) - 1 - temp.isocalendar()[2]) * secsPerDay
-
+    
     this_week = datetime.datetime.now().isocalendar()[1]
     while(this_week + week > datetime.datetime.fromtimestamp(date).isocalendar()[1]): date = date + secsPerDay * 7
 
@@ -73,18 +76,24 @@ def insertEvents(events, service, config):
       'description': event['Loại'],
       'start': {
         'dateTime': datetime.datetime.utcfromtimestamp(date + start_time).isoformat() + 'Z',
+        'timeZone' : 'UTC',
       },
       'end': {
         'dateTime': datetime.datetime.utcfromtimestamp(date + end_time).isoformat() + 'Z',
+        'timeZone' : 'UTC',
       },
       'reminders': {
         'useDefault': False,
-      }
+      },
+      #un-comment this code if you wanna repeat the scheduler
+      #'recurrence': [ 
+      #"RRULE:FREQ=WEEKLY",
+      #],
     }
 
     print(e['summary'], datetime.datetime.fromtimestamp(date).isoformat())
 
-    e = service.events().insert(calendarId='primary', body=e).execute()
+    #e = service.events().insert(calendarId='primary', body=e).execute()
     #return
 
 def readJSON(JsonPath = 'TKB.json'):
