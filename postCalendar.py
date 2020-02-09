@@ -38,10 +38,24 @@ def getService():
 def insertEvents(events, service, config):
   # Get selected events
   week = config['week'] == 'that'
-  periods = [
-    27000, 30600, 33600, 37200, 40200, 45000, 48600, 51600, 54600, 58200
-  ]
+  periods = {
+    '1'	:	27000,
+    '2'	:	30000,
+    '2.5' : 31500,
+    '3'	:	33600,
+    '3.5'	:	35100,
+    '4'	:	36600,
+    '5'	:	40200,
+    '6'	:	45000,
+    '7'	:	48000,
+    '7.5' : 49500,
+    '8'	:	51600,
+    '8.5'	:	51900,
+    '9'	:	54600,
+    '10'	:	58200
+  }
   period = 3000
+  half_period = 1500
   secsPerDay = 86400
 
   main_events = []
@@ -67,9 +81,11 @@ def insertEvents(events, service, config):
 
     if(date < temp.timestamp()): continue
 
-    start_time = periods[int(event['Lịch học']['Tiết bắt đầu']) - 1]
-    end_time = periods[int(event['Lịch học']['Tiết kết thúc']) - 1] + period
-
+    start_time = periods[event['Lịch học']['Tiết bắt đầu']]
+    if (str(event['Lịch học']['Tiết kết thúc']).find('.') == -1):
+      end_time = periods[event['Lịch học']['Tiết kết thúc']] + period
+    else:
+      end_time = periods[event['Lịch học']['Tiết kết thúc']] + half_period
     e = {
       'summary': event['Mã môn học'] + ' - ' + event['Tên môn học'],
       'location': event['Lịch học']['Phòng'] + ' - ' + event['Lịch học']['Cơ sở'],
@@ -86,15 +102,14 @@ def insertEvents(events, service, config):
         'useDefault': False,
       },
       #un-comment this code if you wanna repeat the scheduler
-      #'recurrence': [ 
-      #"RRULE:FREQ=WEEKLY",
-      #],
+      # 'recurrence': [ 
+      # "RRULE:FREQ=WEEKLY",
+      # ],
     }
 
     print(e['summary'], datetime.datetime.fromtimestamp(date).isoformat())
 
-    #e = service.events().insert(calendarId='primary', body=e).execute()
-    #return
+    e = service.events().insert(calendarId='primary', body=e).execute()
 
 def readJSON(JsonPath = 'TKB.json'):
   with open(JsonPath, encoding='utf-8') as db:
@@ -107,4 +122,3 @@ def postCalendar(data):
     config = json.load(conf)
   service = getService()
   insertEvents(data, service, config)
-
