@@ -61,7 +61,7 @@ def insertEvents(events, service, config):
   main_events = []
   for e in events:
     event = events[e]
-    event_week = datetime.datetime.strptime(event['Tuần bắt đầu'], '%d/%m/%Y').isocalendar()[1]
+    event_week = datetime.datetime.strptime(event['StartWeek'], '%d/%m/%Y').isocalendar()[1]
     this_week = datetime.datetime.now().isocalendar()[1]
     #if you wanna repeat the scheduler, use main_events.append(event) without if
     if(event_week <= this_week + week): 
@@ -72,24 +72,24 @@ def insertEvents(events, service, config):
 
   # Push events
   for event in main_events:
-    temp = datetime.datetime.strptime(event['Tuần bắt đầu'], '%d/%m/%Y')
+    temp = datetime.datetime.strptime(event['StartWeek'], '%d/%m/%Y')
     temp = datetime.datetime.fromtimestamp(temp.timestamp() - temp.isocalendar()[2]*secsPerDay + secsPerDay)
-    date = temp.timestamp() + (int(event['Lịch học']['Thứ']) - 1 - temp.isocalendar()[2]) * secsPerDay
+    date = temp.timestamp() + (int(event['Schedule']['Day']) - 1 - temp.isocalendar()[2]) * secsPerDay
     
     this_week = datetime.datetime.now().isocalendar()[1]
     while(this_week + week > datetime.datetime.fromtimestamp(date).isocalendar()[1]): date = date + secsPerDay * 7
 
     if(date < temp.timestamp()): continue
 
-    start_time = periods[event['Lịch học']['Tiết bắt đầu']]
-    if (str(event['Lịch học']['Tiết kết thúc']).find('.') == -1):
-      end_time = periods[event['Lịch học']['Tiết kết thúc']] + period
+    start_time = periods[event['Schedule']['StartTime']]
+    if (str(event['Schedule']['EndTime']).find('.') == -1):
+      end_time = periods[event['Schedule']['EndTime']] + period
     else:
-      end_time = periods[event['Lịch học']['Tiết kết thúc']] + half_period
+      end_time = periods[event['Schedule']['EndTime']] + half_period
     e = {
-      'summary': event['Mã môn học'] + ' - ' + event['Tên môn học'],
-      'location': event['Lịch học']['Phòng'] + ' - ' + event['Lịch học']['Cơ sở'],
-      'description': event['Loại'],
+      'summary': event['SubjectID'] + ' - ' + event['SubjectName'],
+      'location': event['Schedule']['Room'] + ' - ' + event['Schedule']['Where'],
+      'description': event['ClassType'],
       'start': {
         'dateTime': datetime.datetime.utcfromtimestamp(date + start_time).isoformat() + 'Z',
         'timeZone' : 'UTC',
@@ -101,7 +101,8 @@ def insertEvents(events, service, config):
       'reminders': {
         'useDefault': False,
       },
-      #un-comment this code if you wanna repeat the scheduler
+      # un-comment this code if you wanna repeat the scheduler
+
       # 'recurrence': [ 
       # "RRULE:FREQ=WEEKLY",
       # ],
@@ -117,7 +118,6 @@ def readJSON(JsonPath = 'TKB.json'):
     return data
 
 def postCalendar(data):
-  # data là dữ liệu tkb
   with open('config.json') as conf:
     config = json.load(conf)
   service = getService()

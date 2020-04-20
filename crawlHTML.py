@@ -5,14 +5,22 @@ def getLesson(cur : str):
     Lesson = re.search(r'\(.{0,}\)', cur, re.DOTALL)[0][1:-1]
     TimeStart = Lesson[ : Lesson.find('-')]
     TimeEnd = Lesson[Lesson.find('-') + 1 : ]
-    Room = cur[cur.find('-', cur.find('-')+1) + 1 : ]
-
+    Room = cur[cur.find('-', cur.find('-')+1) + 1 : ].strip()
+    if (Room.find(':') == -1):
+        CS = "Tại nhà"
+        room = "Tại nhà"
+    else:
+        if (Room[Room.find(':') - 1] == '2'):
+            CS = "Linh Trung - Thủ Đức"
+        else:
+            CS = "Nguyễn Văn Cừ - Quận 5"
+        room = Room[Room.find(':') + 1 : ]
     Schedule = {
-        "Thứ" : cur[1],
-        "Tiết bắt đầu" : TimeStart,
-        "Tiết kết thúc" : TimeEnd,
-        "Cơ sở" : "Linh Trung - Thủ Đức" if (Room[Room.find(':') - 1] == '2') else "Nguyễn Văn Cừ - Quận 5",
-        "Phòng" : Room[Room.find(':') + 1 : ]
+        "Day" : cur[1],
+        "StartTime" : TimeStart,
+        "EndTime" : TimeEnd,
+        "Where" : CS,
+        "Room" : room
     }
     return Schedule
 def getScheduleJson(InputPath = 'TKB.html', OutputPath = 'TKB.json'):
@@ -29,19 +37,23 @@ def getScheduleJson(InputPath = 'TKB.html', OutputPath = 'TKB.json'):
         #data[3] = loai
         #data[4] = lich hoc
         #data[5] = Tuan bat dau
-        print("Progressing:", (id+1)/len(soup)*100, "%")
+        print(f"Progressing: {(id+1)/len(soup)*100 :.2f}%")
         for i in range(6):
             data[i] = re.search(r'>.{0,}<', str(data[i]), re.DOTALL)[0]
             data[i] = re.sub(r'\n|\t', '', data[i][1 : -1])
-        
+            data[i] = data[i].strip()
+        day_pattern = r'\d\d/\d\d/\d\d\d\d'
+        if re.search(day_pattern, data[5]) is None:
+            continue
         curJson = {
-            "Mã môn học" : data[0],
-            "Tên môn học" : data[1],
-            "Tên lớp" : data[2],
-            "Loại" : "Thực hành" if data[3] == "TH" else "Lý thuyết",
-            "Lịch học" : getLesson(data[4]),
-            "Tuần bắt đầu" : data[5]
+            "SubjectID" : data[0],
+            "SubjectName" : data[1],
+            "ClassName" : data[2],
+            "ClassType" : "Thực hành" if data[3] == "TH" else "Lý thuyết",
+            "Schedule" : getLesson(data[4]),
+            "StartWeek" : data[5]
         }
         json_TKB[id] = curJson
         id+=1
     json.dump(json_TKB, WriteFile, indent=4)
+getScheduleJson()
