@@ -20,14 +20,16 @@ Uptill now, files existing in current folder(`HCMUS_CalendarAutomater`) are:
 * credentials.json
 * TKB.html
 
-Then run the code with command `python HCMUS_CalendarAutomater.py` 
+Then run the code with command `python main.py` 
 
 ## Config
 
-If you want to update timetable of the current week, set `week` attribute as `this` inside `config.json` file, and if you want to update the upcoming week, set `week` as `that`
+If you want to update timetable of the current week, set `week` attribute as `this` inside `config.json` file, and if you want to update the upcoming week, set `week` as `that`. 
+
+If you want to loop the schedule forever (you can delete it later), set `loop` to `true`, otherwise you can set it to anything.
 
 ## Contribution
 
-Thanks [Duy Thuc Le](https://github.com/leduykhongngu) for parsing from raw HTML to JSON database.
+Thanks [Duy Thuc Le](https://github.com/leduythuccs) for parsing from raw HTML to JSON database.
 
 Thanks [Dinh Hai Le](https://github.com/pythagore1123) for uploading database with Calendar API.

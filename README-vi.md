@@ -25,8 +25,10 @@ Rồi chạy code bằng lệnh `python HCMUS_CalendarAutomater.py` ở *command
 
 Ở file `config.json`, thay ` "week" : "that" ` thành ` "week" : "this" ` để đưa lịch của tuần hiện tại lên Calendar (nếu để `that` thì sẽ là của tuần tiếp theo)
 
+Nếu muốn lặp lại thời khóa biểu hàng tuần thì để phần `loop` là `true`.
+
 ## Contribution
 
-Thanks [Duy Thuc Le](https://github.com/leduykhongngu) for parsing from raw HTML to JSON database.
+Thanks [Duy Thuc Le](https://github.com/leduythuccs) for parsing from raw HTML to JSON database.
 
 Thanks [Dinh Hai Le](https://github.com/pythagore1123) for uploading database with Calendar API.

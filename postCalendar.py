@@ -38,6 +38,7 @@ def getService():
 def insertEvents(events, service, config):
   # Get selected events
   week = config['week'] == 'that'
+  loop = config['loop'] == 'true'
   periods = {
     '1'	:	27000,
     '2'	:	30000,
@@ -63,10 +64,8 @@ def insertEvents(events, service, config):
     event = events[e]
     event_week = datetime.datetime.strptime(event['StartWeek'], '%d/%m/%Y').isocalendar()[1]
     this_week = datetime.datetime.now().isocalendar()[1]
-    #if you wanna repeat the scheduler, use main_events.append(event) without if
-    if(event_week <= this_week + week): 
+    if loop or (event_week <= this_week + week):
       main_events.append(event)
-    
 
   # print(main_events)
 
@@ -101,11 +100,10 @@ def insertEvents(events, service, config):
       'reminders': {
         'useDefault': False,
       },
-      # un-comment this code if you wanna repeat the scheduler
-
-      # 'recurrence': [ 
-      # "RRULE:FREQ=WEEKLY",
-      # ],
+      if loop:
+        'recurrence': [ 
+        "RRULE:FREQ=WEEKLY",
+        ],
     }
 
     print(e['summary'], datetime.datetime.fromtimestamp(date).isoformat())
