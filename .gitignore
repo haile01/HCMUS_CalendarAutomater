@@ -1,3 +1,6 @@
 TKB.json
 credentials.json
 token.pickle
+TKB.html
+TKB_files/
+*.pyc
