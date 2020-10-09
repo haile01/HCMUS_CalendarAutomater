@@ -2,6 +2,10 @@
 *A kindly simple way to have your HCMUS's timetable posted on Google Calendar*
 >(Vietnamese in [README-vi.md](README-vi.md))
 
+## Note
+
+Because each event will be set to recursion event, the schedule will repeat weekly forever. If you enter a new semester with a new schedule, please delete those recursion events by hand.
+
 ## Installation
 
 Clone this repository, then run this line on *command prompt/terminal* to install dependencies

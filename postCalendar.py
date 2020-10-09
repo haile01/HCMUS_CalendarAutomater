@@ -37,25 +37,24 @@ def getService():
     return service
 
 
-def insertEvents(events, service, config):
+def insertEvents(events, service):
     # Get selected events
-    week = config['week'] == 'that'
-    loop = config['loop'] == 'true'
     periods = {
-        '1'	:	27000,
-        '2'	:	30000,
-        '2.5': 31500,
-        '3'	:	33600,
-        '3.5'	:	35100,
-        '4'	:	36600,
-        '5'	:	40200,
-        '6'	:	45000,
-        '7'	:	48000,
-        '7.5': 49500,
-        '8'	:	51600,
-        '8.5'	:	51900,
-        '9'	:	54600,
-        '10'	:	58200
+        '0':   24000,
+        '1':	27000,
+        '2':	30000,
+        '2.5':   31500,
+        '3':	33600,
+        '3.5':	35100,
+        '4':	36600,
+        '5':	40200,
+        '6':	45000,
+        '7':	48000,
+        '7.5':   49500,
+        '8':	51600,
+        '8.5':	51900,
+        '9':	54600,
+        '10':	58200
     }
     period = 3000
     half_period = 1500
@@ -64,11 +63,8 @@ def insertEvents(events, service, config):
     main_events = []
     for e in events:
         event = events[e]
-        event_week = datetime.datetime.strptime(
-            event['StartWeek'], '%d/%m/%Y').isocalendar()[1]
         this_week = datetime.datetime.now().isocalendar()[1]
-        if loop or (event_week <= this_week + week):
-            main_events.append(event)
+        main_events.append(event)
 
     # print(main_events)
 
@@ -82,11 +78,22 @@ def insertEvents(events, service, config):
              temp.isocalendar()[2]) * secsPerDay
 
         this_week = datetime.datetime.now().isocalendar()[1]
-        while(this_week + week > datetime.datetime.fromtimestamp(date).isocalendar()[1]):
+        while(this_week > datetime.datetime.fromtimestamp(date).isocalendar()[1]):
             date = date + secsPerDay * 7
 
         if(date < temp.timestamp()):
             continue
+
+        if event['Schedule']['Where'].count('Linh Trung') == 0:
+            print("Quan 5")
+            try:
+                event['Schedule']['StartTime'] = str(int(event['Schedule']['StartTime']) - 1)
+            except Exception:
+                event['Schedule']['StartTime'] = str(float(event['Schedule']['StartTime']) - 1)
+            try:
+                event['Schedule']['EndTime'] = str(int(event['Schedule']['EndTime']) - 1)
+            except Exception:
+                event['Schedule']['EndTime'] = str(float(event['Schedule']['EndTime']) - 1)
 
         start_time = periods[event['Schedule']['StartTime']]
         if (str(event['Schedule']['EndTime']).find('.') == -1):
@@ -108,9 +115,10 @@ def insertEvents(events, service, config):
             'reminders': {
                 'useDefault': False,
             },
+            'recurrence': [
+                "RRULE:FREQ=WEEKLY"
+            ]
         }
-        if loop:
-            e['recurrence'] = ["RRULE:FREQ=WEEKLY"]
 
         print(e['summary'], datetime.datetime.fromtimestamp(date).isoformat())
 
@@ -124,7 +132,5 @@ def readJSON(JsonPath='TKB.json'):
 
 
 def postCalendar(data):
-    with open('config.json') as conf:
-        config = json.load(conf)
     service = getService()
-    insertEvents(data, service, config)
+    insertEvents(data, service)

@@ -1,6 +1,10 @@
 # HCMUS_CalendarAutomater
 *Project này hỗ trợ việc tự động đưa lịch học của sinh viên trường Đại học Khoa học Tự nhiên (HCMUS) lên Google Calendar*
 
+## Lưu ý
+
+Các sự kiện sẽ được để chế độ lặp lại, do đó lịch học sẽ được lặp lại mãi mãi. Vì vậy, khi qua học kì mới, ta cần xoá đi lịch của học kì cũ (có thể tự xoá bằng tay).
+
 ## Cài đặt
 
 Tải repository này về máy (tạm gọi thư mục đó là `HCMUS_CalendarAutomater`), sau đó chạy dòng lệnh sau đây ở *command prompt/terminal* để cài đặt API.
@@ -20,12 +24,6 @@ Tới bước này, trong thư mục `HCMUS_CalendarAutomater` cần có các fi
   - TKB.html 
 
 Rồi chạy code bằng lệnh `python HCMUS_CalendarAutomater.py` ở *command prompt/terminal*
-
-## Config 
-
-Ở file `config.json`, thay ` "week" : "that" ` thành ` "week" : "this" ` để đưa lịch của tuần hiện tại lên Calendar (nếu để `that` thì sẽ là của tuần tiếp theo)
-
-Nếu muốn lặp lại thời khóa biểu hàng tuần thì để phần `loop` là `true`.
 
 ## Contribution
 
